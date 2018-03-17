@@ -5,8 +5,8 @@ import com.badlogic.gdx.math.*
 import main.*
 import main.deserializer.CHTYPE_ACTOR
 import main.deserializer.actor.repl_layout_bunch
-import main.deserializer.cmd.CharacterMoveComp
-import main.deserializer.cmd.VehicleMoveComp
+import main.struct.CharacterMoveComp
+import main.struct.VehicleMoveComp
 import main.struct.*
 import main.struct.Archetype.*
 import main.struct.NetGUIDCache.Companion.guidCache

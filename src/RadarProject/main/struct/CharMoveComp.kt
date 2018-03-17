@@ -2,7 +2,6 @@ package main.struct
 
 import main.deserializer.shortRotationScale
 import main.struct.*
-import main.struct.cmd.CMD.propertyInt
 import main.struct.cmd.*
 
 fun VehicleMoveComp(actor: Actor, bunch: Bunch) {

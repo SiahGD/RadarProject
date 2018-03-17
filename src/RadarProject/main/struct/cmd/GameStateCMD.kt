@@ -7,14 +7,7 @@ import main.register
 import main.struct.Actor
 import main.struct.Bunch
 import main.struct.NetGuidCacheObject
-import main.struct.cmd.CMD.propertyBool
-import main.struct.cmd.CMD.propertyByte
-import main.struct.cmd.CMD.propertyFloat
-import main.struct.cmd.CMD.propertyInt
-import main.struct.cmd.CMD.propertyName
-import main.struct.cmd.CMD.propertyObject
-import main.struct.cmd.CMD.propertyString
-import main.struct.cmd.CMD.propertyVector
+import main.struct.*
 
 object GameStateCMD : GameListener {
     init {

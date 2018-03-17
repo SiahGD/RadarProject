@@ -5,12 +5,6 @@ import main.deserializer.ROLE_MAX
 import main.deserializer.channel.ActorChannel.Companion.actorHasWeapons
 import main.deserializer.channel.ActorChannel.Companion.actors
 import main.struct.*
-import main.struct.cmd.CMD.propertyBool
-import main.struct.cmd.CMD.propertyInt
-import main.struct.cmd.CMD.propertyName
-import main.struct.cmd.CMD.propertyObject
-import main.struct.cmd.CMD.propertyVector100
-import main.struct.cmd.CMD.repMovement
 import main.util.DynamicArray
 
 object WeaponProcessorCMD {

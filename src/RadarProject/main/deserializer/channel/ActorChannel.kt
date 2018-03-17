@@ -4,7 +4,7 @@ package main.deserializer.channel
 import com.badlogic.gdx.math.*
 import main.*
 import main.deserializer.CHTYPE_ACTOR
-import main.deserializer.actor.repl_layout_bunch
+//import main.deserializer.actor.repl_layout_bunch
 import main.struct.CharacterMoveComp
 import main.struct.VehicleMoveComp
 import main.struct.*
@@ -13,6 +13,7 @@ import main.struct.NetGUIDCache.Companion.guidCache
 import main.struct.cmd.PlayerStateCMD.selfID
 import main.util.*
 import java.util.concurrent.ConcurrentHashMap
+import main.struct.cmd.receiveProperties
 
 class ActorChannel(ChIndex: Int, client: Boolean = true): Channel(ChIndex, CHTYPE_ACTOR, client) {
     companion object: GameListener {
@@ -125,12 +126,14 @@ class ActorChannel(ChIndex: Int, client: Boolean = true): Channel(ChIndex, CHTYP
                 val outPayload = bunch.deepCopy(NumPayloadBits)
 
                 info { ",${if (bHasRepLayout) "hasRepLayout" else "noRepLayout"},actor[${actor.netGUID.value}]archetype=${actor.archetype}" }
+                var parseComplete=!bHasRepLayout
                 if (bHasRepLayout) {
                     if (!client)// Server shouldn't receive properties.
                         return
                     if (actor.Type == DroopedItemGroup && repObj?.pathName == "RootComponent")
                         repObj = NetGuidCacheObject("DroppedItemGroupRootComponent", repObj.outerGUID)
-                    repl_layout_bunch(outPayload, repObj, actor)
+                    //repl_layout_bunch(outPayload, repObj, actor)
+                    parseComplete=receiveProperties(outPayload,repObj,actor)
                 }
                 if (!client) {
                     when {

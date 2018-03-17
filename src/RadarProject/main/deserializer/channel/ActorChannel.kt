@@ -80,7 +80,6 @@ class ActorChannel(ChIndex: Int, client: Boolean = true): Channel(ChIndex, CHTYP
         val actor = actor!!
         if (actor.Type == DroppedItem && bunch.bitsLeft() == 0)
             droppedItemLocation.remove(droppedItemToItem[actor.netGUID] ?: return)
-
         while (bunch.notEnd()) {
             //header
             val bHasRepLayout = bunch.readBit()
@@ -106,8 +105,9 @@ class ActorChannel(ChIndex: Int, client: Boolean = true): Channel(ChIndex, CHTYP
 
                     // adding some stuff
 
-                        if (classObj != null && (actor.Type == DroopedItemGroup || actor.Type == DroppedItem)) {
+                        if (classObj != null && (actor.Type == DroopedItemGroup || actor.Type == DroppedItem || actor.Type == AirDrop)) {
                             val sn = Item.isGood(classObj.pathName)
+                            println("airdrop Items: $itemBag")
                             if (sn != null)
                                 droppedItemLocation[netguid] = tuple2(Vector2(actor.location.x, actor.location.y), sn)
                         }
@@ -199,7 +199,7 @@ class ActorChannel(ChIndex: Int, client: Boolean = true): Channel(ChIndex, CHTYP
                         actors[netGUID] = this
                         when (Type) {
                             Weapon -> weapons[netGUID] = this
-                            AirDrop -> airDropLocation[netGUID] = location
+                            AirDrop -> airDropLocation[netGUID]=location
                             DeathDropItemPackage -> corpseLocation[netGUID] = location
                             else -> {
                             }

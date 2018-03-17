@@ -778,7 +778,7 @@ class GLMap : InputAdapter(), ApplicationListener, GameListener {
         weaponsToFilter = if (filterWeapon != 1) {
             arrayListOf("")
         } else {
-            arrayListOf("M16A4", "HK416", "Kar98k", "SCAR-L", "AK47", "SKS", "Mini14", "DP28", "UMP", "Vector", "UZI", "Pan")
+            arrayListOf("M16A4", "HK416", "Kar98k", "SCAR-L", "AUG", "M249", "AWM", "Groza", "M24", "MK14", "Mini14", "DP28", "UMP", "Vector", "UZI", "Pan")
         }
 
         healsToFilter = if (filterHeals != 1) {
@@ -802,33 +802,9 @@ class GLMap : InputAdapter(), ApplicationListener, GameListener {
         level2Filter = if (filterLvl2 != 1) {
             arrayListOf("")
         } else {
-            arrayListOf("Bag2", "Arm2", "Helm2")
+            arrayListOf("Bag2", "Armor2", "Helmet2", "Bag3", "Armor3", "Helmet3")
         }
-
-
-        val iconScale = 2f / camera.zoom
         paint(itemCamera.combined) {
-            droppedItemLocation.values
-                    .forEach {
-                        val (x, y) = it._1
-                        val items = it._2
-                        val (sx, sy) = Vector2(x, y).mapToWindow()
-                        val syFix = windowHeight - sy
-
-                        items.forEach {
-                            if ((items !in weaponsToFilter && items !in scopesToFilter && items !in attachToFilter && items !in level2Filter
-                                            && items !in ammoToFilter && items !in healsToFilter) && items !in throwToFilter
-                                    && iconScale > 20 && sx > 0 && sx < windowWidth && syFix > 0 && syFix < windowHeight) {
-                                iconImages.setIcon(items)
-
-                                draw(iconImages.icon,
-                                        sx - iconScale / 2, syFix - iconScale / 2,
-                                        iconScale, iconScale)
-                            }
-                        }
-                    }
-
-
             //Draw Corpse Icon
             corpseLocation.values.forEach {
                 val (x, y) = it
@@ -851,6 +827,28 @@ class GLMap : InputAdapter(), ApplicationListener, GameListener {
                         false, true)
             }
 
+        val iconScale = 2f / camera.zoom
+
+            droppedItemLocation.values
+                    .forEach {
+                        val (x, y) = it._1
+                        val items = it._2
+                        val (sx, sy) = Vector2(x, y).mapToWindow()
+                        val syFix = windowHeight - sy
+                        println("Items: ${it}")
+
+                        items.forEach {
+                            if ((items !in weaponsToFilter && items !in scopesToFilter && items !in attachToFilter && items !in level2Filter
+                                            && items !in ammoToFilter && items !in healsToFilter) && items !in throwToFilter
+                                    && iconScale > 20 && sx > 0 && sx < windowWidth && syFix > 0 && syFix < windowHeight) {
+                                iconImages.setIcon(items)
+
+                                draw(iconImages.icon,
+                                        sx - iconScale / 2, syFix - iconScale / 2,
+                                        iconScale, iconScale)
+                            }
+                        }
+                    }
 
             drawMyself(tuple4(null, selfX, selfY, selfDirection))
             drawPawns(typeLocation)

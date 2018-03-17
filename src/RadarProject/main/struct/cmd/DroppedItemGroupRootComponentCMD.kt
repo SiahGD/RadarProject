@@ -79,7 +79,6 @@ fun Bunch.updateItemBag(actor:Actor) {
         items.rawGet(i)?.apply {toRemove.add(this)}
     toRemove.removeAll(toAdd)
     itemBag[actor.netGUID]=items
-    println("airdrop Items: $items")
     for (removedComp in toRemove)
         droppedItemLocation.remove(droppedItemCompToItem[removedComp] ?: continue)
 }
